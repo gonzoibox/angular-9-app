@@ -9,7 +9,12 @@ export class ServersComponent implements OnInit {
   allowNewServer = false;
   serverCreationStatus = 'No server was created.';
   serverName = 'TestServer';
-
+  serverCreated = false;
+  servers = ['Server-1', 'Server-2'];
+  ifShowDetails = false;
+  detailsLogArray = [];
+  numberOfDetailsClicks = 0;
+  clicks = false;
   userName = '';
 
   constructor() {
@@ -20,7 +25,9 @@ export class ServersComponent implements OnInit {
   }
 
   onCreateServer() {
-    this.serverCreationStatus = this.serverName;
+    this.serverCreated = true;
+    this.servers.push(this.serverName);
+    this.serverCreationStatus = 'Server was created. Name is ' + this.serverName;
   }
 
   onUpdateServerName(event: any) {
@@ -34,4 +41,12 @@ export class ServersComponent implements OnInit {
   resetUserName() {
     this.userName = '';
   }
+
+  showDetails() {
+    this.ifShowDetails = !this.ifShowDetails;
+    this.numberOfDetailsClicks = this.numberOfDetailsClicks + 1;
+    this.detailsLogArray.push(this.numberOfDetailsClicks);
+    if(this.numberOfDetailsClicks > 5) {this.clicks = true}
+  }
+
 }

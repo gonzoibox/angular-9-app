@@ -1,4 +1,4 @@
-<label>User Name</label>
+<!-- <label>User Name</label>
 <input
 placeholder="Enter User Name"
 type="text"
@@ -6,10 +6,22 @@ class="form-control"
 [(ngModel)]="userName"
 >
 <p>{{userName}}</p>
+ -->
+<p>{{clicks}}</p>
 <button class="btn btn-primary"
-(click)="resetUserName()"
-[disabled]="isNameEmpty()"
->Reset User Name</button>
+(click)="showDetails()"
+>Display details</button>
+<p *ngIf="ifShowDetails; else noDetails">Some details to show..</p>
+<ng-template #noDetails></ng-template>
+
+<p *ngFor="let number of detailsLogArray">
+    <span *ngIf="number < 5; else styled">{{number}}</span>
+    <ng-template #styled>
+        <span [ngClass]="{styled:true}" [ngStyle]="{'background-color':'blue'}">{{number}}</span>
+    </ng-template>
+
+</p>
+
 <hr>
 <label>Server Name</label>
 <input
@@ -23,7 +35,10 @@ class="form-control"
 (click)="onCreateServer()"
 >Add New Server</button>
 <hr>
-<p>{{serverCreationStatus}}</p>
+<!-- <p>{{serverCreationStatus}}</p> -->
+<p *ngIf="serverCreated; else noServer">{{serverCreationStatus}}</p>
+<ng-template #noServer>
+    <p>No server was created</p>
+</ng-template>
 <hr>
-<app-server></app-server>
-<app-server></app-server>
+<app-server *ngFor="let server of servers"></app-server>
