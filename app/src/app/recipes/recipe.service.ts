@@ -35,13 +35,22 @@ export class RecipeService {
         this.shoppingListService.addIngredients(ingredients);
     }
 
+    recipesChangedEvent() {
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
     addRecipe(recipe: Recipe) {
         this.recipes.push(recipe);
-        this.recipesChanged.next(this.recipes.slice());
+        this.recipesChangedEvent();
     }
 
     updateRecipe(index: number, newRecipe: Recipe) {
         this.recipes[index] = newRecipe;
-        this.recipesChanged.next(this.recipes.slice());
+        this.recipesChangedEvent();
+    }
+
+    deleteRecipe(index: number) {
+        this.recipes.splice(index, 1);
+        this.recipesChangedEvent();
     }
 }
