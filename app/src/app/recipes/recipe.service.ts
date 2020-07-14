@@ -22,7 +22,12 @@ export class RecipeService {
             'https://cdn.pixabay.com/photo/2015/04/20/13/25/burger-731298_1280.jpg',
             [new Ingredient('Meat', 1), new Ingredient('Buns', 1)])
       ];
-
+    
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChangedEvent();
+    }
+    
     getRecipes() {
         return this.recipes.slice();
     }
