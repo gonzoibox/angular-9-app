@@ -16,10 +16,13 @@ export class AuthComponent {
     constructor(private authService: AuthService,
                 private router: Router) {}
 
+
+    onHandleError() {
+        this.error = null;
+    }
+
     onSwitchMode() {
         this.isLoginMode = !this.isLoginMode;
-        console.log(this.isLoginMode);
-
     }
 
     onSubmit(form: NgForm) {
